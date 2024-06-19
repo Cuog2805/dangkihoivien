@@ -1,0 +1,92 @@
+﻿@model dangkihoivien.Models.Post
+@{
+    ViewBag.Title = "Posting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="form-box">
+    <div id="form-box-header">
+        <h3>Tạo bài đăng</h3>
+    </div>
+    <div id="form-box-content">
+        @using (Html.BeginForm("Posting", "PostSite", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="title">Tiêu đề</label>
+                <span class="text-danger"> *</span>
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                <input class="form-group-input"
+                       id="title"
+                       name="Title"
+                       placeholder="Tiêu đề"
+                       type="text"
+                       value="@Model.Title" />
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <span class="text-danger"> *</span>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                <input class="form-group-input"
+                       id="description"
+                       name="Description"
+                       placeholder="Mô tả"
+                       type="text"
+                       value="@Model.Description" />
+            </div>
+
+            <div class="form-group">
+                <label for="post-thumbnail">Thumbnail</label>
+                @Html.ValidationMessageFor(model => model.Thumbnail, "", new { @class = "text-danger" })
+                <input class="form-group-input"
+                       id="post-thumbnail"
+                       name="Thumbnail"
+                       placeholder="Thumbnail"
+                       type="file"
+                       value="@Model.Thumbnail"
+                       onchange="LoadImage(event)" />
+                <img class="img-thumbnail" id="post-thumbnail-output" alt="Thumbnail" width="200" src="" />
+            </div>
+
+            <div class="form-group">
+                <label for="post-content">Nội dung</label>
+                <span class="text-danger"> *</span>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                <textarea class="form-group-input"
+                          id="post-content"
+                          name="Content">
+                </textarea>
+            </div>
+
+            <!-- xac nhan -->
+            <div class="form-group">
+                <input class="input-button" type="submit" value="Đăng bài viết">
+                @Html.ActionLink("Thoát", "PostSiteIndex", null, new { @class = "btn btn-danger"})
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+            CKEDITOR.replace('Content', {
+                height: 500,
+                filebrowserUploadUrl: '@Url.Action("UploadImage", "PostSite")',
+                filebrowserBrowseUrl: '@Url.Action("UploadExplorer", "PostSite")'
+            });
+            CKEDITOR.on('fileUploadRequest', function (evt) {
+                var xhr = evt.data.fileLoader.xhr;
+                evt.stop();
+            });
+    </script>
+
+    <script>
+        function LoadImage(event) {
+            console.log(event)
+            var image = document.getElementById('post-thumbnail-output')
+            image.src = URL.createObjectURL(event.target.files[0])
+        }
+    </script>
+}

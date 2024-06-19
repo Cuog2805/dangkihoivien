@@ -1,0 +1,37 @@
+﻿@model dangkihoivien.Models.Post
+@{
+    ViewBag.Title = "PostDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card gedf-card mb-3">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="mr-2 m-1">
+                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                </div>
+                <div class="ml-2 m-1">
+                    <div class="h5">@Model.HoiVien.ThongTinDoanhNghiep.Tendoanhnghiep</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>&ensp;@Model.CreateAt.ToShortDateString()</div>
+        <a class="card-link" href="#">
+            <h5 class="card-title">@Model.Title</h5>
+        </a>
+
+        <p class="card-text">
+            @Html.Raw(Model.Content)
+        </p>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+    </div>
+</div>
+

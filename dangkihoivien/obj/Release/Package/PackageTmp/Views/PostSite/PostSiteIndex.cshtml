@@ -1,0 +1,35 @@
+﻿@model IEnumerable<dangkihoivien.Models.Post>
+@{
+    ViewBag.Title = "PostSiteIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-primary">Đăng bài</strong>
+        <a href="~/PostSite/Posting" class="stretched-link">Bấm vào để đăng bài</a>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Bài đăng</strong>
+            <h3 class="mb-0">@item.Title</h3>
+            <div class="mb-1 text-muted">@item.CreateAt.ToShortDateString(), @item.HoiVien.ThongTinDoanhNghiep.Tendoanhnghiep</div>
+            <p class="card-text mb-auto">
+                @item.Description
+            </p>
+            <a href="~/PostSite/PostDetail?postId=@item.Id" class="stretched-link">Bấm vào để đọc</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img class="bd-placeholder-img"
+                 width="250"
+                 height="250"
+                 src="~/Asset/Image/@item.Thumbnail" />
+        </div>
+    </div>
+}
+
+

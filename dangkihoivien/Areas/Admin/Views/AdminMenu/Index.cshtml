@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    @Html.Action("ThongTinHoiVien", "AdminMenu")
+    @Html.Action("BangHoiVienDoiDuyet", "AdminMenu")
+    @Html.Action("BangHoiVienDaDuyet", "AdminMenu")
+</div>
+
+@section EventScript{
+    <script type="text/javascript">
+
+        function createTableRow(response) {
+            return `<tr id="table-row-hoi-vien-da-duyet-${response.hvId}">
+                <td>${response.hvTendoanhnghiep}</td>
+                <td>${response.hvMasothue}</td>
+                <td>${response.hvDiachi}</td>
+                <td>${response.hvDienthoai}</td>
+                <td>${response.hvZalo}</td>
+                <td>${response.hvEmail}</td>
+            <td>
+                <a href="${response.hvWebsite}">${response.hvWebsite}</a>
+            </td>
+            <td>
+                <button type="button"
+                        class="btn btn-secondary m-1"
+                        id="featureBtn" onclick="btnHuyDuyet(${response.hvId})">
+                    <span class="icon text-white-50">
+                        <i class="fa-solid fa-xmark"></i>
+                    </span>
+                    <span class="text-content">Hủy duyệt</span>
+                </button>
+                <button type="button"
+                        class="btn btn-primary m-1"
+                        id="featureBtn"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#table-detail-item-da-duyet-${response.hvId}">
+                    <span class="icon text-white-50">
+                        <i class="fa-solid fa-eye"></i>
+                    </span>
+                    <span class="text-content">Xem thông tin</span>
+                </button>
+            </td>
+            </tr >
+            <tr class="collapse accordion-collapse" id="table-detail-item-da-duyet-${response.hvId}">
+                <td colspan="8">
+                    <h4>Người đại diện</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Họ tên</th>
+                                <th>Chức vụ</th>
+                                <th>Ngày sinh</th>
+                                <th>Số điện thoại</th>
+                                <th>Zalo</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${response.nddHoten}</td>
+                                <td>${response.nddChucvu}</td>
+                                <td>${response.nddNgaySinh}</td>
+                                <td>${response.nddSdt}</td>
+                                <td>${response.nddZalo}</td>
+                                <td>${response.nddEmail}</td>
+                            </tr>
+                        </tbody>
+                </table>
+                <h4>Người liên hệ</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>Chức vụ</th>
+                            <th>Ngày sinh</th>
+                            <th>Số điện thoại</th>
+                            <th>Zalo</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${response.nlhHoten}</td>
+                            <td>${response.nlhChucvu}</td>
+                            <td>${response.nlhNgaySinh}</td>
+                            <td>${response.nlhSdt}</td>
+                            <td>${response.nlhZalo}</td>
+                            <td>${response.nlhEmail}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </td>
+            </tr>
+            <tr id="table-row-admin-duyet-${response.hvId}">
+                <td colspan="8">Người duyệt: ${response.admin}</td>
+            </tr>
+        `
+        }
+
+        function btnDuyet(idHoiVien) {
+            var data = { IdHoiVien: idHoiVien }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DuyetHoiVien")',
+                data: data,
+                success: function (response) {
+                    console.log(response)
+                    if (response.permission) {
+                        $("#hoi-vien-da-duyet-div").html(response.hvDaduyet);
+                        $("#hoi-vien-chua-duyet-div").html(response.hvChuaduyet);
+                        //hide detail
+                        $("#table-detail-item-" + idHoiVien).attr('class', 'collapse accordion-collapse');
+                        $("#table-row-hoi-vien-cho-duyet-" + idHoiVien).hide();
+                        $("#table-hoi-vien-da-duyet #table-body-hoi-vien-da-duyet").append(createTableRow(response));
+                    }
+                    else {
+                        alert(response.messageError)
+                    }
+                }
+            })
+        }
+        function btnHuyDuyet(idHoiVien) {
+            var data = { IdHoiVien: idHoiVien }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("HuyDuyetHoiVien")',
+                data: data,
+                success: function (response) {
+                    console.log(response)
+                    if (response.permission) {
+                        $("#hoi-vien-da-duyet-div").html(response.hvDaduyet);
+                        $("#hoi-vien-chua-duyet-div").html(response.hvChuaduyet);
+                        $("#table-row-hoi-vien-cho-duyet-" + idHoiVien).show();
+                        $("#table-row-hoi-vien-da-duyet-" + idHoiVien).remove();
+                        $("#table-detail-item-da-duyet-" + idHoiVien).remove()
+                        $("#table-row-admin-duyet-" + idHoiVien).remove();
+                    }
+                    else {
+                        alert(response.messageError)
+                    }
+                }
+            })
+        }
+
+        function btnTuChoi(idHoiVien) {
+            var data = { IdHoiVien: idHoiVien }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("TuChoiHoiVien")',
+                data: data,
+                success: function (response) {
+                    if (response.permission) {
+                        $("#hoi-vien-bi-tu-choi-div").html(response.hvBituchoi);
+                        $("#hoi-vien-chua-duyet-div").html(response.hvChuaduyet);
+                        $("#table-detail-item-" + idHoiVien).remove();
+                        $("#table-row-hoi-vien-cho-duyet-" + idHoiVien).remove();
+                    }
+                    else {
+                        alert(response.messageError)
+                    }
+                }
+            })
+        }
+
+    </script>
+}

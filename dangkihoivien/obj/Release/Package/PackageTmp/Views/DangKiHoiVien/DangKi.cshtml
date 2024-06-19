@@ -1,0 +1,262 @@
+﻿@model dangkihoivien.Models.HoiVien
+
+@{
+    ViewBag.Title = "DangKi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="form-box">
+    <div id="form-box-header">
+        <h2>ĐĂNG KÝ THÀNH VIÊN</h2>
+    </div>
+    <div id="form-box-content">
+        @using (Html.BeginForm("DangKi", "DangKiHoiVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <!-- thong tin doanh nghiep -->
+            <div class="form-group">
+                <label for="tendoanhnghiep">Tên doanh nghiệp</label>
+                <span class="text-danger"> *</span>
+                @Html.ValidationMessageFor(model => model.ThongTinDoanhNghiep.Tendoanhnghiep, "", new { @class = "text-danger" })
+                <input class="form-group-input"
+                       id="tendoanhnghiep"
+                       name="ThongTinDoanhNghiep.Tendoanhnghiep"
+                       placeholder="Tên doanh nghiệp"
+                       type="text"
+                       value="@Model.ThongTinDoanhNghiep.Tendoanhnghiep" />
+            </div>
+            <div class="form-group">
+                <label for="masothue">Mã số thuế</label>
+                <span class="text-danger"> *</span>
+                @Html.ValidationMessageFor(model => model.ThongTinDoanhNghiep.Masothue, "", new { @class = "text-danger" })
+                <input class="form-group-input"
+                       id="masothue"
+                       name="ThongTinDoanhNghiep.Masothue"
+                       placeholder="Mã số thuế"
+                       type="text"
+                       value="@Model.ThongTinDoanhNghiep.Masothue" />
+            </div>
+            <div class="form-group">
+                <label for="dia_chi">Địa chỉ</label>
+                <span class="text-danger"> *</span>
+                @Html.ValidationMessageFor(model => model.ThongTinDoanhNghiep.Diachi, "", new { @class = "text-danger" })
+                <input class="form-group-input"
+                       id="dia_chi"
+                       name="ThongTinDoanhNghiep.Diachi"
+                       placeholder="Địa chỉ"
+                       type="text"
+                       value="@Model.ThongTinDoanhNghiep.Diachi" />
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="dien_thoai_dn">Điện thoại</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.ThongTinDoanhNghiep.Dienthoai, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="dien_thoai_dn"
+                           name="ThongTinDoanhNghiep.Dienthoai"
+                           placeholder="Điện thoại"
+                           type="text"
+                           value="@Model.ThongTinDoanhNghiep.Dienthoai" />
+                </div>
+                <div class="col-md-6">
+                    <label for="zalo_dn">Zalo (SĐT sử dụng zalo)</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.ThongTinDoanhNghiep.Zalo, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="zalo_dn"
+                           name="ThongTinDoanhNghiep.Zalo"
+                           placeholder="Zalo (SĐT sử dụng zalo)"
+                           type="text"
+                           value="@Model.ThongTinDoanhNghiep.Zalo" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email_dn">Email</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.ThongTinDoanhNghiep.Email, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="email_dn"
+                           name="ThongTinDoanhNghiep.Email"
+                           placeholder="Email"
+                           type="text"
+                           value="@Model.ThongTinDoanhNghiep.Email" />
+                </div>
+                <div class="col-md-6">
+                    <label for="website">Website</label>
+                    <input class="form-group-input"
+                           id="website"
+                           name="ThongTinDoanhNghiep.Website"
+                           placeholder="Website"
+                           type="text"
+                           @Model.ThongTinDoanhNghiep.Website />
+                </div>
+            </div>
+
+            <!-- nguoi dai dien -->
+            <h3>Người đại diện</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="ho_ten_ndd">Họ tên người đứng đầu</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiDaiDien.Hoten, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="ho_ten_ndd"
+                           name="NguoiDaiDien.Hoten"
+                           placeholder="Họ tên người đứng đầu"
+                           type="text"
+                           value="@Model.NguoiDaiDien.Hoten" />
+                </div>
+                <div class="col-md-6">
+                    <label for="chuc_vu_ndd">Chức vụ</label>
+                    <input class="form-group-input"
+                           id="chuc_vu_ndd"
+                           name="NguoiDaiDien.Chucvu"
+                           placeholder="Chức vụ"
+                           type="text"
+                           value="@Model.NguoiDaiDien.Chucvu" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email_ndd">Email</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiDaiDien.Email, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="email_ndd"
+                           name="NguoiDaiDien.Email"
+                           placeholder="Email"
+                           type="text"
+                           value="@Model.NguoiDaiDien.Email" />
+                </div>
+                <div class="col-md-6">
+                    <label for="ngay_sinh_ndd">Ngày sinh</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiDaiDien.Ngaysinh, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="ngay_sinh_ndd"
+                           name="NguoiDaiDien.Ngaysinh"
+                           placeholder="Ngày sinh"
+                           type="date"
+                           value="@Model.NguoiDaiDien.Ngaysinh.ToString("yyyy-MM-dd")" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="dien_thoai_ndd">Điện thoại</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiDaiDien.Sdt, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="dien_thoai_ndd"
+                           name="NguoiDaiDien.Sdt"
+                           placeholder="Điện thoại"
+                           type="text"
+                           value="@Model.NguoiDaiDien.Sdt" />
+                </div>
+                <div class="col-md-6">
+                    <label for="zalo_ndd">Zalo (SĐT sử dụng zalo)</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiDaiDien.Zalo, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="zalo_ndd"
+                           name="NguoiDaiDien.Zalo"
+                           placeholder="Zalo (SĐT sử dụng zalo)"
+                           type="text"
+                           value="@Model.NguoiDaiDien.Zalo" />
+                </div>
+            </div>
+
+            <!-- nguoi lien he -->
+            <h3>Người liên hệ công việc</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="ho_ten_nlh">Họ tên người liên hệ công việc</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiLienHe.Hoten, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="ho_ten_nlh"
+                           name="NguoiLienHe.Hoten"
+                           placeholder="Họ tên người liên hệ công việc"
+                           type="text"
+                           value="@Model.NguoiLienHe.Hoten" />
+                </div>
+                <div class="col-md-6">
+                    <label for="chuc_vu_nlh">Chức vụ</label>
+                    <input class="form-group-input"
+                           id="chuc_vu_nlh"
+                           name="NguoiLienHe.Chucvu"
+                           placeholder="Chức vụ"
+                           type="text"
+                           value="@Model.NguoiLienHe.Chucvu" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email_nlh">Email</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiLienHe.Email, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="email_nlh"
+                           name="NguoiLienHe.Email"
+                           placeholder="Email"
+                           type="text"
+                           value="@Model.NguoiLienHe.Email" />
+                </div>
+                <div class="col-md-6">
+                    <label for="ngay_sinh_nlh">Ngày sinh</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiLienHe.Ngaysinh, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="ngay_sinh_nlh"
+                           name="NguoiLienHe.Ngaysinh"
+                           placeholder="Ngày sinh"
+                           type="date"
+                           value="@Model.NguoiLienHe.Ngaysinh.ToString("yyyy-MM-dd")" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="dien_thoai_nlh">Điện thoại</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiLienHe.Sdt, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="dien_thoai_nlh"
+                           name="NguoiLienHe.Sdt"
+                           placeholder="Điện thoại"
+                           type="text"
+                           value="@Model.NguoiLienHe.Sdt" />
+                </div>
+                <div class="col-md-6">
+                    <label for="zalo_nlh">Zalo (SĐT sử dụng zalo)</label>
+                    <span class="text-danger"> *</span>
+                    @Html.ValidationMessageFor(model => model.NguoiLienHe.Zalo, "", new { @class = "text-danger" })
+                    <input class="form-group-input"
+                           id="zalo_nlh"
+                           name="NguoiLienHe.Zalo"
+                           placeholder="Zalo (SĐT sử dụng zalo)"
+                           type="text"
+                           value="@Model.NguoiLienHe.Zalo" />
+                </div>
+            </div>
+
+            <!-- xac nhan -->
+            <div class="form-group">
+                @Html.CheckBoxFor(model => model.DongYDieuKhoan)
+                Sau khi nghiên cứu hiểu rõ mục tiêu, chương trình hoạt động của Hiệp hội Doanh nghiệp tỉnh Hà Nam, tôi đại diện doanh nghiệp làm đơn này xin gia Hiệp hội Doanh nghiệp tỉnh Hà Nam
+                Tôi cam kết thực hiện đúng các quy định theo Điều lệ và Quy chế của Hiệp hội.
+                <span class="text-danger">@ViewBag.XacNhanDieuKhoan</span>
+            </div>
+            <div class="form-group">
+                <input class="input-button" type="submit" value="Đăng ký">
+            </div>
+        }
+    </div>
+</div>
+<div id="form-contact">
+    <p>Hỗ trợ qua zalo: </p>
+    <a href="https://zalo.me/g/qmfvdm642" target="_blank">
+        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-App-Rec.png">
+    </a>
+</div>

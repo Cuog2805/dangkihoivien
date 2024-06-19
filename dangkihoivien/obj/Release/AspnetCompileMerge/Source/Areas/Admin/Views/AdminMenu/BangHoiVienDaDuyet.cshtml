@@ -1,0 +1,115 @@
+﻿@model IEnumerable<dangkihoivien.Models.HoiVien>
+
+<div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+    <h3>Thành viên đã duyệt</h3>
+</div>
+<div class="row">
+    <div class="table-responsive">
+        <table class="table table-hover" id="table-hoi-vien-da-duyet">
+            <thead>
+                <tr>
+                    <th>Tên doanh nghiệp</th>
+                    <th>Mã số thuế</th>
+                    <th>Địa chỉ</th>
+                    <th>Điện thoại</th>
+                    <th>Zalo</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="table-body-hoi-vien-da-duyet">
+                @foreach (var item in Model)
+                {
+                    //hoi vien 1
+                    <tr id="table-row-hoi-vien-da-duyet-@item.Id">
+                        <td>@item.ThongTinDoanhNghiep.Tendoanhnghiep</td>
+                        <td>@item.ThongTinDoanhNghiep.Masothue</td>
+                        <td>@item.ThongTinDoanhNghiep.Diachi</td>
+                        <td>@item.ThongTinDoanhNghiep.Dienthoai</td>
+                        <td>@item.ThongTinDoanhNghiep.Zalo</td>
+                        <td>@item.ThongTinDoanhNghiep.Email</td>
+                        <td>
+                            <a href="@item.ThongTinDoanhNghiep.Website">@item.ThongTinDoanhNghiep.Website</a>
+                        </td>
+                        <td>
+                            <button type="button"
+                                    class="btn btn-secondary m-1"
+                                    id="featureBtn" onclick="btnHuyDuyet(@item.Id)">
+                                <span class="icon text-white-50">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
+                                <span class="text-content">Hủy duyệt</span>
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary m-1"
+                                    id="featureBtn"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#table-detail-item-da-duyet-@item.Id">
+                                <span class="icon text-white-50">
+                                    <i class="fa-solid fa-eye"></i>
+                                </span>
+                                <span class="text-content">Xem thông tin</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="collapse accordion-collapse" id="table-detail-item-da-duyet-@item.Id">
+                        <td colspan="8">
+                            <h4>Người đại diện</h4>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Họ tên</th>
+                                        <th>Chức vụ</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Zalo</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.NguoiDaiDien.Hoten</td>
+                                        <td>@item.NguoiDaiDien.Chucvu</td>
+                                        <td>@item.NguoiDaiDien.Ngaysinh.ToShortDateString()</td>
+                                        <td>@item.NguoiDaiDien.Sdt</td>
+                                        <td>@item.NguoiDaiDien.Zalo</td>
+                                        <td>@item.NguoiDaiDien.Email</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4>Người liên hệ</h4>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Họ tên</th>
+                                        <th>Chức vụ</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Zalo</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.NguoiLienHe.Hoten</td>
+                                        <td>@item.NguoiLienHe.Chucvu</td>
+                                        <td>@item.NguoiLienHe.Ngaysinh.ToShortDateString()</td>
+                                        <td>@item.NguoiLienHe.Sdt</td>
+                                        <td>@item.NguoiLienHe.Zalo</td>
+                                        <td>@item.NguoiLienHe.Email</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr id="table-row-admin-duyet-@item.Id"> 
+                        <td colspan="8">Người duyệt: @item.NguoiDuyet.Username</td>
+                    </tr>
+                    //hoi vien 1
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

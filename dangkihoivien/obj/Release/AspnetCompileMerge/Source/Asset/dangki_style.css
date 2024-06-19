@@ -1,0 +1,118 @@
+﻿/* khung */
+* {
+    margin: 0;
+}
+
+body {
+    background: #F5F7F8;
+}
+
+#wrapper {
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    padding: 15px;
+    margin: 0% 20%;
+}
+
+#content {
+    padding: 0% 15%;
+}
+
+/* ben trong content */
+#form-box {
+    display: block;
+    justify-content: center;
+}
+
+#form-box-header {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.text-danger {
+    color: red;
+}
+
+.form-group-input {
+    font-size: 14px;
+    padding: 10px 15px;
+    height: 42px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+    .form-group-input:focus {
+        border: 1px solid #5ab2ff;
+    }
+
+.row {
+    margin: 10px 0px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.col-md-6 {
+    width: 48%;
+}
+
+@media screen and (max-width: 600px) {
+    .row {
+        display: block;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+}
+
+.input-button {
+    padding: 10px;
+    margin: 15px 0;
+    background-color: #03aed2;
+    border-radius: 5px;
+    border: none;
+}
+
+    .input-button:hover {
+        cursor: pointer;
+    }
+
+#form-contact {
+    display: flex;
+    align-items: center;
+}
+
+    #form-contact img {
+        margin: 5px;
+        border-radius: 10px;
+        height: 50px;
+    }
+
+#footer {
+    height: 50px;
+    padding: 10px 10px 10px 50px;
+    background: #10439F;
+    display: flex;
+    align-items: center;
+}
+
+    #footer :first-child {
+        color: rgb(135, 135, 135)
+    }
+
+    #footer :nth-child(2) {
+        color: #ccc
+    }

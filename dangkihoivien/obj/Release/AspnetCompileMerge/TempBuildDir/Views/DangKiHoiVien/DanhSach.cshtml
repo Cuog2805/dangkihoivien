@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "DanhSach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    var ttdnList = new dangkihoivien.Models.DangKiHoiVienDBContext().ThongTinDoanhNghieps.ToList();
+}
+<h2>DanhSach</h2>
+
+<table class="table">
+    <tr>
+        <th>Tên doanh nghiệp</th>
+        <th>Mã số thuế</th>
+    </tr>
+
+@foreach (var item in ttdnList) {
+    <tr>
+        <td>@item.Tendoanhnghiep</td>
+        <td>@item.Masothue</td>
+    </tr>
+}
+
+</table>
